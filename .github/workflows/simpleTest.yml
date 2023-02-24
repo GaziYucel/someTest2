@@ -1,0 +1,21 @@
+name: SimpleTest
+
+on: [workflow_dispatch]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5 # use the explicit version number
+        with:
+          build: npm run build
+          start: npm start
+        env:
+          CYPRESS_REPO_TOKEN: ${{ secrets.CYPRESS_REPO_TOKEN }}
+        run:
+          echo ${{ secrets.CYPRESS_API_TOKEN }}
