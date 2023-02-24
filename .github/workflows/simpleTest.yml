@@ -17,5 +17,6 @@ jobs:
           start: npm start
         env:
           CYPRESS_REPO_TOKEN: ${{ secrets.CYPRESS_REPO_TOKEN }}
+      - name: Show data
         run:
           echo ${{ secrets.CYPRESS_API_TOKEN }}
