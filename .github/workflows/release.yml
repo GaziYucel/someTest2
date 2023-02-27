@@ -26,7 +26,7 @@ jobs:
           message="Update $file on $dateTime"
           content="${dateTime} "
           repositoryOwner=${{ env.REPOSITORY_OWNER }}
-          repositoryName=${{ evn.REPOSITORY_NAME }}
+          repositoryName=${{ env.REPOSITORY_NAME }}
         
           echo $repositoryOwner
           echo $repositoryName
