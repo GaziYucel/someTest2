@@ -28,4 +28,4 @@ jobs:
       - name: execute UpdateForUbuntu.sh
         run: |
           echo "sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
-          sh ./UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN"
+          sh ./.github/workflows/UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN"
