@@ -8,7 +8,7 @@ scriptName="first-setup.sh"
 subModulePath="ubuntu"
 message="Update $subModulePath on $dateTime"
 
-echo "# # working dir: start"
+echo "# working dir: start"
 readlink -f .
 
 echo "# setup git username / email: $GITHUB_USERNAME"
@@ -52,16 +52,16 @@ echo "# working dir: cd .."
 readlink -f .
 
 echo "# checkout to new local branch with name $branchName"
-git checkout -b "$branchName"
+# git checkout -b "$branchName"
 
 echo "# add directory $subModulePath recursively"
-git add --all "$subModulePath"
+# git add --all "$subModulePath"
 
 echo "# commit all changes with message: $message"
-git commit -m "$message"
+# git commit -m "$message"
 
 echo "# push to new branch with name: $branchName"
-git push -u origin "$branchName"
+# git push -u origin "$branchName"
 
 echo "# create pull request with label and body: $message"
 # gh pr create --title "$message" --body "$message"
