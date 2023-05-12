@@ -64,6 +64,6 @@ echo "# push to new branch with name: $branchName"
 git push -u origin "$branchName"
 
 echo "# create pull request with label and body: $message"
-gh pr create --title "$message" --body "$message"
+# gh pr create --title "$message" --body "$message"
 
 echo "# end"
