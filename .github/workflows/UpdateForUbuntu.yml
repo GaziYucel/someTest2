@@ -28,23 +28,27 @@ jobs:
       - name: execute UpdateForUbuntu.sh
         run: |
           dateTime=$(date +%Y-%m-%d_%H-%M-%S)
-          branchName="update_for_ubuntu_$dateTime"
-          message="Update $subModulePath on $dateTime"
+          branchName="UpdateForUbuntu_$dateTime"
+          message="Updated for Ubuntu on $dateTime"
           
-          echo "sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
-          sh ./.github/workflows/UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN" "$dateTime"
+          echo "# setup git username / email: $GITHUB_USERNAME"
+          git config user.name "$GITHUB_USERNAME"
+          git config user.email "$GITHUB_USERNAME@users.noreply.github.com"
+          
+          echo "# sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
+          sh ./UpdateForUbuntu.sh
 
-          # echo "# checkout to new local branch with name $branchName"
-          # git checkout -b "$branchName"
+          echo "# checkout to new local branch with name $branchName"
+          git checkout -b "$branchName"
 
-          # echo "# add directory $subModulePath recursively"
-          # git add --all .
+          echo "# add all changes recursively"
+          git add --all .
 
-          # echo "# commit all changes with message: $message"
-          # git commit -m "$message"
+          echo "# commit all changes with message: $message"
+          git commit -m "$message"
 
-          # echo "# push to new branch with name: $branchName"
-          # git push -u origin "$branchName"
+          echo "# push to new branch with name: $branchName"
+          git push -u origin "$branchName"
 
           echo "# create pull request with label and body: $message"
-          # gh pr create --title "$message" --body "$message"
+          gh pr create --title "$message" --body "$message"
