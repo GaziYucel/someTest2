@@ -8,6 +8,9 @@ scriptName="first-setup.sh"
 subModulePath="ubuntu"
 message="Update $subModulePath on $dateTime"
 
+echo "working dir: start"
+readlink -f .
+
 echo "setup git username / email: $GITHUB_USERNAME"
 git config user.name "$GITHUB_USERNAME"
 git config user.email "$GITHUB_USERNAME@users.noreply.github.com"
@@ -30,6 +33,9 @@ mkdir "$subModulePath"
 echo "change directory to $subModulePath"
 cd "$subModulePath"
 
+echo "working dir: cd $subModulePath"
+readlink -f .
+
 echo "create file $subModulePath/_updated_$dateTime.txt"
 echo "$dateTime" > "./_updated_$dateTime.txt"
 
@@ -41,6 +47,9 @@ echo "execute install script"
 
 echo "change directory to parent"
 cd ..
+
+echo "working dir: cd .."
+readlink -f .
 
 echo "checkout to new local branch with name $branchName"
 git checkout -b "$branchName"
