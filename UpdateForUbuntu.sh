@@ -1,54 +1,68 @@
-# @file .github/workflows/UpdateForUbuntu.yml
-#
-# Copyright (c) 2023+ TIB Hannover
-# Copyright (c) 2023+ Gazi Yucel
-# Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
-#
-# @brief Submodule to be used in the Open Journal Systems plugin latexConverter.
+echo "# variables"
+dateTime=$(date +%Y-%m-%d_%H-%M-%S)
+scriptUrl="//contextgarden.net/standalone/setup/first-setup.sh"
+scriptName="first-setup.sh"
+subModulePath="ubuntu"
+# GITHUB_USERNAME=${1}
+# branchName="update_for_ubuntu_$dateTime"
+# message="Updated for Ubuntu on $dateTime"
 
-name: UpdateForUbuntu
+echo "# working dir: start"
+readlink -f .
 
-on:
-  # schedule:
-  # cron format: minute, hour, day of the month, month, day of the week
-  # - cron: "0 6 * * *"
-  workflow_dispatch: ~
+# echo "# setup git username / email: $GITHUB_USERNAME"
+# git config user.name "$GITHUB_USERNAME"
+# git config user.email "$GITHUB_USERNAME@users.noreply.github.com"
 
-env:
-  GITHUB_TOKEN: ${{ github.token }}
-  GITHUB_USERNAME: ${{ github.actor }}
+echo "# check if rsync is installed, install if not"
+if [ ! -x "$(which rsync)" ]; then
+  echo "# install rsync"
+	sudo apt update
+  sudo apt install rsync
+else
+    echo "# rsync already installed"
+fi
 
-jobs:
-  main_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
+echo "# remove directory $subModulePath recursively"
+rm -rf "$subModulePath"
 
-      - name: execute UpdateForUbuntu.sh
-        run: |
-          dateTime=$(date +%Y-%m-%d_%H-%M-%S)
-          branchName="UpdateForUbuntu_$dateTime"
-          message="Updated for Ubuntu on $dateTime"
-          
-          echo "# setup git username / email: $GITHUB_USERNAME"
-          git config user.name "$GITHUB_USERNAME"
-          git config user.email "$GITHUB_USERNAME@users.noreply.github.com"
-          
-          echo "# sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
-          sh ./UpdateForUbuntu.sh
+echo "# create path $subModulePath"
+mkdir "$subModulePath"
 
-          echo "# checkout to new local branch with name $branchName"
-          git checkout -b "$branchName"
+echo "# change directory to $subModulePath"
+cd "$subModulePath"
 
-          echo "# add all changes recursively"
-          git add --all .
+echo "# working dir: cd $subModulePath"
+readlink -f .
 
-          echo "# commit all changes with message: $message"
-          git commit -m "$message"
+echo "# get latest install script"
+# rsync -ptv rsync:$scriptUrl ./$scriptName || exit 1
 
-          echo "# push to new branch with name: $branchName"
-          git push -u origin "$branchName"
+echo "# execute install script"
+# sh ./$scriptName
 
-          echo "# create pull request with label and body: $message"
-          gh pr create --title "$message" --body "$message"
+echo "# create file $subModulePath/_updated_$dateTime.txt"
+echo "# $dateTime" > "./_updated_$dateTime.txt"
+
+echo "# change directory to parent"
+cd ..
+
+echo "# working dir: cd .."
+readlink -f .
+
+# echo "# checkout to new local branch with name $branchName"
+# git checkout -b "$branchName"
+
+# echo "# add directory $subModulePath recursively"
+# git add --all "$subModulePath"
+
+# echo "# commit all changes with message: $message"
+# git commit -m "$message"
+
+# echo "# push to new branch with name: $branchName"
+# git push -u origin "$branchName"
+
+# echo "# create pull request with label and body: $message"
+# gh pr create --title "$message" --body "$message"
+
+echo "# end"
