@@ -1,7 +1,7 @@
 echo "# variables"
 GITHUB_USERNAME=${1}
 GITHUB_TOKEN=${2}
-dateTime=$(date +%Y-%m-%d_%H-%M-%S)
+dateTime=${3}
 branchName="update_for_ubuntu_$dateTime"
 scriptUrl="//contextgarden.net/standalone/setup/first-setup.sh"
 scriptName="first-setup.sh"
