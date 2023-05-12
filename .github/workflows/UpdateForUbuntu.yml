@@ -37,7 +37,7 @@ jobs:
           git checkout -b "$branchName"
 
           echo "# add directory $subModulePath recursively"
-          git add --all "$subModulePath"
+          git add --all .
 
           echo "# commit all changes with message: $message"
           git commit -m "$message"
