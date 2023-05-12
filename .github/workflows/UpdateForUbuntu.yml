@@ -29,6 +29,7 @@ jobs:
         run: |
           dateTime=$(date +%Y-%m-%d_%H-%M-%S)
           branchName="update_for_ubuntu_$dateTime"
+          message="Update $subModulePath on $dateTime"
           
           echo "sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
           sh ./.github/workflows/UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN" "$dateTime"
