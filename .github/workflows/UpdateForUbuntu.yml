@@ -27,8 +27,11 @@ jobs:
 
       - name: execute UpdateForUbuntu.sh
         run: |
+          dateTime=$(date +%Y-%m-%d_%H-%M-%S)
+          branchName="update_for_ubuntu_$dateTime"
+          
           echo "sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
-          sh ./.github/workflows/UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN"
+          sh ./.github/workflows/UpdateForUbuntu.sh "$GITHUB_USERNAME" "$GITHUB_TOKEN" "$dateTime"
 
           echo "# checkout to new local branch with name $branchName"
           git checkout -b "$branchName"
