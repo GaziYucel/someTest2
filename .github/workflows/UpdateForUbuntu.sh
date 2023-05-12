@@ -28,7 +28,7 @@ echo "create path $subModulePath"
 mkdir "$subModulePath"
 
 echo "change directory to $subModulePath"
-cd "$subModulePath" || exit 1
+cd "$subModulePath"
 
 echo "create file $subModulePath/_updated_$dateTime.txt"
 echo "$dateTime" > "./_updated_$dateTime.txt"
