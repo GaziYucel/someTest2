@@ -43,7 +43,7 @@ echo "change directory to parent"
 cd ..
 
 echo "checkout to new local branch with name $branchName"
-#git checkout -b "$branchName"
+git checkout -b "$branchName"
 
 echo "add directory $subModulePath recursively"
 git add --all "$subModulePath"
