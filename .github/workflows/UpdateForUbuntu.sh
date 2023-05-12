@@ -51,19 +51,19 @@ cd ..
 echo "# working dir: cd .."
 readlink -f .
 
-echo "# checkout to new local branch with name $branchName"
+# echo "# checkout to new local branch with name $branchName"
 # git checkout -b "$branchName"
 
-echo "# add directory $subModulePath recursively"
+# echo "# add directory $subModulePath recursively"
 # git add --all "$subModulePath"
 
-echo "# commit all changes with message: $message"
+# echo "# commit all changes with message: $message"
 # git commit -m "$message"
 
-echo "# push to new branch with name: $branchName"
+# echo "# push to new branch with name: $branchName"
 # git push -u origin "$branchName"
 
-echo "# create pull request with label and body: $message"
+# echo "# create pull request with label and body: $message"
 # gh pr create --title "$message" --body "$message"
 
 echo "# end"
