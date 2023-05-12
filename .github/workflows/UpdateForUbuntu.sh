@@ -60,10 +60,10 @@ git add --all "$subModulePath"
 echo "# commit all changes with message: $message"
 git commit -m "$message"
 
-echo "# push to new branch with name: $branchName"
-git push -u origin "$branchName"
+# echo "# push to new branch with name: $branchName"
+# git push -u origin "$branchName"
 
-echo "# create pull request with label and body: $message"
+# echo "# create pull request with label and body: $message"
 # gh pr create --title "$message" --body "$message"
 
 echo "# end"
