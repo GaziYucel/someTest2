@@ -25,13 +25,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: execute UpdateForUbuntu.sh
+      - name: execute main job
         run: |
           dateTime=$(date +%Y-%m-%d_%H-%M-%S)
           branchName="UpdateForUbuntu_$dateTime"
           message="Updated for Ubuntu on $dateTime"
           
-          echo "# working dir: start"
+          echo "# working dir: start yml"
           readlink -f .
 
           echo "# setup git username / email: $GITHUB_USERNAME"
@@ -55,3 +55,6 @@ jobs:
 
           echo "# create pull request with label and body: $message"
           gh pr create --title "$message" --body "$message"
+
+          echo "# working dir: end yml"
+          readlink -f .
