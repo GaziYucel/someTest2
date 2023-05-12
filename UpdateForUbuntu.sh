@@ -1,0 +1,54 @@
+# @file .github/workflows/UpdateForUbuntu.yml
+#
+# Copyright (c) 2023+ TIB Hannover
+# Copyright (c) 2023+ Gazi Yucel
+# Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+#
+# @brief Submodule to be used in the Open Journal Systems plugin latexConverter.
+
+name: UpdateForUbuntu
+
+on:
+  # schedule:
+  # cron format: minute, hour, day of the month, month, day of the week
+  # - cron: "0 6 * * *"
+  workflow_dispatch: ~
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+  GITHUB_USERNAME: ${{ github.actor }}
+
+jobs:
+  main_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: execute UpdateForUbuntu.sh
+        run: |
+          dateTime=$(date +%Y-%m-%d_%H-%M-%S)
+          branchName="UpdateForUbuntu_$dateTime"
+          message="Updated for Ubuntu on $dateTime"
+          
+          echo "# setup git username / email: $GITHUB_USERNAME"
+          git config user.name "$GITHUB_USERNAME"
+          git config user.email "$GITHUB_USERNAME@users.noreply.github.com"
+          
+          echo "# sh ./UpdateForUbuntu.sh $GITHUB_USERNAME"
+          sh ./UpdateForUbuntu.sh
+
+          echo "# checkout to new local branch with name $branchName"
+          git checkout -b "$branchName"
+
+          echo "# add all changes recursively"
+          git add --all .
+
+          echo "# commit all changes with message: $message"
+          git commit -m "$message"
+
+          echo "# push to new branch with name: $branchName"
+          git push -u origin "$branchName"
+
+          echo "# create pull request with label and body: $message"
+          gh pr create --title "$message" --body "$message"
